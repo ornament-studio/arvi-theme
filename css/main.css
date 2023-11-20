@@ -634,6 +634,17 @@ header .menu li a:hover {
   margin-right: 6px;
   margin-bottom: 10px;
 }
+.aboutgame_info-good li.clickable {
+  transition: box-shadow 0.4s;
+  cursor: pointer;
+}
+.aboutgame_info-good li.clickable:hover {
+  box-shadow: inset 0px 0px 3px 2px #2FA2FF;
+}
+.aboutgame_info-good li a {
+  text-decoration: none;
+  color: #1C1C3B;
+}
 .aboutgame_image {
   width: 52%;
   line-height: 0;

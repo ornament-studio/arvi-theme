@@ -60,6 +60,31 @@ function create_location_category(){
 }
 add_action('init', 'create_location_category');
 
+function create_location_tags(){
+    register_taxonomy(
+        'locations_tags',
+        'location_tag',
+        array(
+            'labels' => array(
+                'name'              => 'Теги',
+                'singular_name'     => 'Теги',
+                'search_items'      => 'Пошук тегів',
+                'all_items'         => 'Всі теги',
+                'edit_item'         => 'Редагувати тег',
+                'update_item'       => 'Оновити тег',
+                'add_new_item'      => 'Додати новий тег',
+                'new_item_name'     => 'Назва тега',
+                'menu_name'         => 'Теги',
+            ),
+            'hierarchical' => false,
+            'sort' => true,
+            'args' => array('orderby' => 'term_order'),
+            'show_admin_column' => true
+        )
+    );
+}
+add_action('init', 'create_location_tags');
+
 function create_custom_post_type_location() {
     $labels = array(
         'name' => 'Сторінка для локації',
@@ -87,7 +112,7 @@ function create_custom_post_type_location() {
         'has_archive' => false,
         'hierarchical' => true,
         'menu_position' => null,
-        'taxonomies' => array('locations'),
+        'taxonomies' => array('locations', 'locations_tags'),
         'supports' => array('title', 'editor', 'thumbnail', 'page-attributes')
     );
     register_post_type('location', $args);

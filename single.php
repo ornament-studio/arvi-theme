@@ -22,14 +22,21 @@
                             <?php if(!empty(get_field('mintitle_bl1'))) { ?>
                                 <p class="aboutgame_info-title black"><?php the_field('mintitle_bl1'); ?></p>
                             <?php } ?>
-                            
-                            <?php if(!empty(get_field('tegsglobal'))) { ?>
+
+                            <?php if (have_rows('location-tags-list')): ?>
                                 <ul class="aboutgame_info-good">
-                                    <?php foreach(get_field('tegsglobal') as $key => $value) { ?>
-                                        <li><?php echo $value; ?></li>
-                                    <?php } ?>
+                                <?php while (have_rows('location-tags-list')): the_row(); 
+                                    $tag = get_sub_field('location-tags-tag-name');
+                                    $link = get_sub_field('location-tags-tag-link');
+                                    ?>
+                                    <?php if ($link): ?>
+                                        <li class="clickable"><a href="<?=$link['url'] ?>"><?=get_term($tag)->name?></a></li>
+                                    <?php else: ?>
+                                        <li><p><?=get_term($tag)->name?></p></li>
+                                    <?php endif; ?>
+                                <?php endwhile; ?>
                                 </ul>
-                            <?php } ?>
+                            <?php endif; ?>
 
                             <?php if(!empty(get_field('links_bl1'))) { ?>
                                 <div class="main_buttons">
