@@ -242,9 +242,7 @@
                                                         <p class="reviews_item-text">"<?php echo $item['text']; ?></p>
                                                     <?php } ?>
                                                 </div>
-                                                <div class="reviews_item-minimage ofc">
-                                                    <?php echo wp_get_attachment_image($item['img']['id'], '50-50'); ?>
-                                                </div>
+                                                
                                                 <div class="reviews_item-info">
                                                     <?php if(!empty($item['name'])) { ?>
                                                         <p><?php echo $item['name']; ?></p>

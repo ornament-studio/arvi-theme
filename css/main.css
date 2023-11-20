@@ -744,6 +744,9 @@ header .menu li a:hover {
   font-weight: 500;
   line-height: 1.6;
 }
+a.gameinfo_item-text {
+  margin-top: 0;
+}
 .gameinfo_item-text span {
   font-weight: 700;
 }
@@ -2020,9 +2023,12 @@ header .menu li a:hover {
   }
   .reviews_item {
     margin: 0 10px;
+    flex-direction: column-reverse;
   }
   .reviews_item-image {
-    display: none;
+    width: 330px;
+    height: 230px;
+    margin: 20px auto 0;
   }
   .reviews_item-content {
     width: 100%;
@@ -2406,6 +2412,9 @@ header .menu li a:hover {
   }
   body {
     padding-top: 75px;
+  }
+  .reviews_item-image {
+    width: 230px;
   }
 }
 @media (max-width: 576px) {
