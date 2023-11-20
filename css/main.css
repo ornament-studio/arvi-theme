@@ -808,6 +808,7 @@ header .menu li a:hover {
   width: auto;
   transition: filter 0.4s;
   cursor: pointer;
+  object-fit: cover;
 }
 .galery img:hover {
   filter: contrast(125%);
@@ -2371,7 +2372,7 @@ header .menu li a:hover {
     width: calc(50% - 20px);
   }
   .galery img {
-    height: 240px;
+    height: 440px;
   }
   .aboutgame_slider .slider_arrow.slider_prew {
     left: 12px;
@@ -2450,12 +2451,13 @@ header .menu li a:hover {
     width: 100%;
   }
   .galery img {
-    height: 220px;
+    height: 440px;
   }
   .galery_area {
     margin: 0 -5px;
   }
   .galery .slick-slide {
+    width: 300px;
     margin: 0 5px;
   }
   .slick-dots li button {
@@ -2468,7 +2470,7 @@ header .menu li a:hover {
 }
 @media (max-width: 480px) {
   .galery img {
-    height: 220px;
+    height: 440px;
   }
   .modal_img video {
     width: 270px;

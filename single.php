@@ -106,6 +106,20 @@
                 </div>
             </section>
         <?php } ?>
+
+        <?php if(!get_field('hide_bl5')) { ?>
+            <section class="galery">
+                <div class="container">
+                    <?php if(!empty(get_field('slider_bl5'))) { ?>
+                        <div class="galery_area">
+                            <?php foreach(get_field('slider_bl5') as $item) {
+                                echo wp_get_attachment_image($item['img']['id'], '300'); 
+                            } ?>
+                        </div>
+                    <?php } ?>
+                </div>
+            </section>
+        <?php } ?>
         
         <?php if(!get_field('hide_bl3')) { ?>
             <section class="forall">
@@ -193,21 +207,6 @@
                             </a>
                         <?php $loop_key++; } wp_reset_postdata(); } ?>
                     </div>
-                </div>
-            </section>
-        <?php } ?>
-
-
-        <?php if(!get_field('hide_bl5')) { ?>
-            <section class="galery">
-                <div class="container">
-                    <?php if(!empty(get_field('slider_bl5'))) { ?>
-                        <div class="galery_area">
-                            <?php foreach(get_field('slider_bl5') as $item) {
-                                echo wp_get_attachment_image($item['img']['id'], '300'); 
-                            } ?>
-                        </div>
-                    <?php } ?>
                 </div>
             </section>
         <?php } ?>
