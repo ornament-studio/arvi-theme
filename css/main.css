@@ -1745,6 +1745,40 @@ a.gameinfo_item-text {
 .gamefilter.inside .gamefilter_reset {
   display: inline-block;
 }
+.lang_switcher {
+  position: relative;
+  display: inline-block;
+}
+.lang_switcher-other_langs {
+  display: none;
+  position: absolute;
+  right: -15px;
+  background-color: #f9f9f9;
+  width: auto;
+  box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+.lang_switcher:hover .lang_switcher-other_langs {
+  display: block;
+}
+.lang_switcher-lang_title,
+.lang_switcher-lang_link {
+  font-weight: 700;
+  color: #1C1C3B;
+  text-decoration: none;
+  transition: color 0.4s;
+  cursor: pointer;
+}
+.lang_switcher-lang_link:hover {
+  color: #2FA2FF;
+}
+.header .menuwrap.only_lang {
+  width: 60%;
+  display: flex;
+  justify-content: flex-end;
+}
+
 @media (max-width: 1400px) {
   header .logo {
     width: 150px;
@@ -1960,6 +1994,9 @@ a.gameinfo_item-text {
   }
   header .menu {
     margin-left: 0;
+    max-width: 365px;
+    align-items: center;
+    text-align: center;
   }
   header .menu li {
     margin-right: 25px;
@@ -2319,6 +2356,12 @@ a.gameinfo_item-text {
   .mobbutton path {
     fill: #1C1C3B;
   }
+  header .menu {
+    align-items: flex-start;
+  }
+  .header .menuwrap.only_lang {
+    justify-content: flex-start;
+  }
   .header .menuwrap {
     padding: 70px 20px 40px;
     position: fixed;
@@ -2427,6 +2470,30 @@ a.gameinfo_item-text {
   .reviews_item-image {
     width: 230px;
   }
+  .lang_switcher {
+    position: relative;
+    display: flex;
+  }
+  .lang_switcher-other_langs {
+    display: block;
+    position: initial;
+    background-color: unset;
+    box-shadow: none;
+    padding: 0;
+    z-index: unset;
+  }
+  .lang_switcher-lang_link,
+  .lang_switcher-lang_title {
+    font-size: 17px;
+    color: #FFFFFF;
+  }
+  .lang_switcher-active_lang,
+  .lang_switcher-lang_item {
+    margin-right: 20px;
+  }
+  .lang_switcher-active_lang span {
+    text-decoration: underline;
+  }
 }
 @media (max-width: 576px) {
   .link.green.filter_reset {
@@ -2524,4 +2591,9 @@ a.gameinfo_item-text {
   .mobbutton {
     width: 30px;
   }
+}
+
+.header,
+.header .menuwrap {
+  top: 46px !important;
 }
