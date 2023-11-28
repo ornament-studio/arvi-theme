@@ -1774,7 +1774,7 @@ a.gameinfo_item-text {
   color: #2FA2FF;
 }
 .header .menuwrap.only_lang {
-  width: 60%;
+  width: 70%;
   display: flex;
   justify-content: flex-end;
 }
@@ -1894,6 +1894,9 @@ a.gameinfo_item-text {
   }
   header .menu li {
     margin-right: 40px;
+  }
+  .header .menuwrap.only_lang {
+    width: 60%;
   }
   .modal_img video {
     width: 700px;

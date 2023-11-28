@@ -192,10 +192,10 @@ add_image_size( '50-50', 50, 50, false);
 
 // Add custom language WPML switcher to top menu
 function addLangSwitcherToMenu ($items, $args) {
-    $languages = apply_filters('wpml_active_languages', NULL, array('skip_missing' => 0, 'orderby=id&order=desc'));
+    $languages = apply_filters('wpml_active_languages', NULL, array('skip_missing' => 1, 'orderby=id&order=desc'));
     $lang_switcher = '';
     
-    if (!empty($languages)) {
+    if (!empty($languages) && count($languages) > 1) {
         $active_lang = '<div class="lang_switcher-active_lang">';
         $other_langs = '<div class="lang_switcher-other_langs">';
         
