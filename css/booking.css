@@ -1,0 +1,374 @@
+.booking .container {
+	position: relative;
+}
+
+.back_btn {
+	margin-top: 20px;
+	font-size: 20px;
+	font-weight: 700;
+	margin-bottom: 22px;
+	width: 100%;
+}
+
+.back_btn-link {
+	color: #1C1C3B;
+	text-decoration: none;
+}
+
+.back_btn-link:before {
+	content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NjkuNCAzNDEuMDEiPjxnIGlkPSJMYXllcl8yIiBkYXRhLW5hbWU9IkxheWVyIDIiPjxnIGlkPSJtYXJrcyI+PGcgaWQ9IlMyZmYxby50aWYiPjxwYXRoIGQ9Ik0xNzcsMGMxOC41Nyw4LjA1LDIxLjc0LDI0LjkyLDcuMzQsMzkuMzJxLTUyLDUyLTEwNC4wNiwxMDRjLTEuMjcsMS4yOC0yLjUsMi42MS00LDQuMiwyLjIsMS40Nyw0LjM4Ljg1LDYuMzcuODVxMTgwLjM1LDAsMzYwLjY4LDBjMTIuODEsMCwyMS43OSw0Ljc5LDI2LjA2LDE3LjIxdjEwYy00LjI4LDEyLjQxLTEzLjI2LDE3LjIyLTI2LjA3LDE3LjIxcS0xODAuMS0uMTgtMzYwLjIxLDBjLTIuMDksMC00LjI3LS40OS02LjM5LjUuMjgsMi4xLDIsMywzLjI3LDQuMjFxNTIuMzUsNTIuMzgsMTA0Ljc1LDEwNC43MmM4LDgsMTAsMTcuNDMsNS43OSwyNi4zM2EyMS43NCwyMS43NCwwLDAsMS0zMi4wOCw4Ljc0LDQxLjU1LDQxLjU1LDAsMCwxLTUuNjMtNC45UTgxLDI2MC41NSw5LjI0LDE4OC44Yy0xMi4zNy0xMi4zNy0xMi4zMi0yNC4yOC4xNC0zNi43M1E4MSw4MC41MSwxNTIuNTgsOC45M0EzOS40OCwzOS40OCwwLDAsMSwxNjUuMDUsMFoiLz48L2c+PC9nPjwvZz48L3N2Zz4=');
+	display: inline-block;
+	width: 20px;
+	margin-right: 10px;
+}
+
+.booking-wrapper {
+	display: flex;
+}
+
+.booking-item {
+	width: 60%;
+}
+
+.booking-item .title {
+	padding-right: 80px;
+	position: relative;
+	display: inline-block;
+}
+
+.booking-item .title:after {
+	content: "";
+	position: absolute;
+	top: 5px;
+	right: 0;
+	width: 68px;
+	height: 30px;
+	z-index: 2;
+	background: url(../img/figures/f1.svg) no-repeat;
+	background-size: 100% 100%;
+}
+
+.booking-item--main_video {
+	margin-top: 20px;
+}
+
+.booking-item--gameinfo_area {
+	display: flex;
+	justify-content: left;
+	flex-wrap: wrap;
+	text-align: center;
+	gap: 30px;
+	margin-top: 20px;
+	padding: 50px;
+	background: url(../img/aboutgamebg.png) repeat-y top center, linear-gradient(-120deg, #2FA2FF 0%, #020054 100%);
+	background-size: 100% auto;
+	border-radius: 20px;
+}
+
+.booking-item--gameinfo_area .gameinfo_item {
+	margin-right: 0;
+}
+
+.booking-item--gameinfo_area .gameinfo_item-name {
+	margin-bottom: 8px;
+}
+
+.booking-item--aboutgame_area {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: center;
+	position: relative;
+	background: url(../img/aboutgamebg.png) repeat-y top center, linear-gradient(-120deg, #2FA2FF 0%, #020054 100%);
+	background-size: 100% auto;
+	margin-top: 20px;
+	padding: 60px 50px;
+	border-radius: 20px;
+}
+
+.booking-item--aboutgame_area .aboutgame_info-text {
+	color: #1C1C3B;
+	margin-top: 20px;
+	margin-bottom: 0;
+}
+
+.booking-item--aboutgame_area .aboutgame_image {
+	width: 100%;
+}
+
+.booking-item--aboutgame_area .aboutgame_info {
+	width: 100%;
+}
+
+.booking-item--aboutgame_area.scrol {
+	background: #DDFF7C;
+	padding: 60px 50px 100px;
+}
+
+@media (max-width: 1024px) {
+	.booking-item {
+		width: 50%;
+	}
+}
+
+/* Booking form */
+
+.booking-form {
+	width: 40%;
+	margin-left: 40px;
+	padding: 20px;
+    border-radius: 20px;
+    height: 100%;
+    border: 1px solid #D4D4D4;
+    box-shadow: 
+    	0 0 1px rgba(18,25,97,.24),
+    	0 24px 24px rgba(18,25,97,.03),
+    	0 2px 2px rgba(18,25,97,.03),
+    	0 4px 4px rgba(18,25,97,.03),
+    	0 8px 8px rgba(18,25,97,.03),
+    	0 16px 16px rgba(18,25,97,.03);
+}
+
+.booking-form .gform-theme--framework .gf_progressbar .percentbar_blue {
+	background-color: #2FA2FF;
+}
+
+#gform_next_button_1_1 {
+	background-color: #2FA2FF;
+	border-radius: 10px;
+}
+
+@media (max-width: 1024px) {
+	.booking-form {
+		width: 40%;
+	}
+}
+
+
+/* Spinner */
+
+#overlay{	
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height:100%;
+  display: none;
+  background: rgba(255,255,255,0.8);
+}
+.cv-spinner {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+.spinner {
+  width: 80px;
+  height: 80px;
+  border: 6px #ddd solid;
+  border-top: 6px #2e93e6 solid;
+  border-radius: 50%;
+  animation: sp-anime 0.8s infinite linear;
+}
+@keyframes sp-anime {
+  100% { 
+	transform: rotate(360deg); 
+  }
+}
+.is-hide{
+  display: none;
+}
+
+/* Datepicker */
+
+.booking-form_calendar .ui-datepicker {
+/*    inline-size: 300px;*/
+    padding-block: 16px;
+    padding-inline: 16px;
+}
+
+.booking-form_calendar .ui-datepicker-header {
+    align-items: stretch;
+    display: flex;
+    border: none;
+    background: none;
+}
+
+.booking-form_calendar .ui-datepicker-title {
+    display: flex;
+    flex: auto;
+    gap: 8px;
+    margin-inline: 8px;
+}
+
+.booking-form_calendar .ui-datepicker select.ui-datepicker-month, 
+.booking-form_calendar .ui-datepicker select.ui-datepicker-year {
+	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='10' height='6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M.293.293a1 1 0 0 1 1.414 0L5 3.586 8.293.293a1 1 0 0 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414Z' fill='%23686E77'/%3E%3C/svg%3E");
+    background-position: calc(100% - 12px) center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+    box-shadow: 0 1px 4px rgba(18,25,97,.078);;
+    flex: auto;
+    inline-size: auto;
+    margin: 0;
+    text-align: start;
+}
+
+.booking-form_calendar .ui-datepicker-prev,
+.booking-form_calendar .ui-datepicker-next {
+    position: relative;
+    display: flex;
+    flex: none;
+    justify-content: center;
+    align-items: center;
+    block-size: auto;
+    cursor: pointer;
+    inline-size: 20px;
+}
+
+.booking-form_calendar .ui-datepicker-next {
+    order: 1;
+}
+
+.booking-form_calendar .ui-datepicker-prev:before,
+.booking-form_calendar .ui-datepicker-next:before {
+    -webkit-font-smoothing: antialiased;
+    color: #686e77;
+    font-family: "gform-icons-orbital";
+    font-size: 20px;
+    line-height: 1;
+}
+
+.booking-form_calendar .ui-datepicker-prev:before {
+    content: "\e91b";
+}
+
+.booking-form_calendar .ui-datepicker-next:before {
+    content: "\e91c";
+}
+
+.booking-form_calendar .ui-datepicker thead {
+    
+}
+
+.booking-form_calendar .ui-datepicker table {
+    margin-block-end: 0;
+    margin-block-start: 16px;
+    border-collapse: collapse;
+    font-size: 14px;
+    inline-size: 100%;
+    table-layout: fixed;
+}
+.booking-form_calendar .ui-datepicker table td, 
+.booking-form_calendar .ui-datepicker table th {
+    block-size: 40px;
+}
+
+.booking-form_calendar .ui-datepicker table td a,
+.booking-form_calendar .ui-datepicker table td span {
+    align-items: center;
+    display: flex;
+    inline-size: 100%;
+    block-size: 100%;
+    justify-content: center;
+    text-decoration: none;
+    color: #1C1C3B;
+    height: 100%;
+    border-radius: 3px;
+}
+
+.booking-form_calendar .ui-datepicker table td.ui-datepicker-today a {
+    background-color: rgb(244, 248, 255);
+}
+
+.booking-form_calendar .ui-datepicker table td.ui-datepicker-current-day a {
+    background-color: #2FA2FF;
+    color: #fff;
+}
+
+.booking-form_calendar .ui-datepicker table td span {
+	color: #cfd3d9;
+}
+
+.booking-time_slots .time_slots {
+	display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.booking-time_slots .time_slot {
+	line-height: 3;
+	border-radius: 10px;
+	position: relative;
+}
+
+.booking-time_slots .time_slots .time_slot-radio {
+	position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.booking-time_slots .time_slots .time_slot-label {
+	padding: 10px;
+    border: 1px solid #D4D4D4;
+    border-radius: 10px;
+}
+
+.booking-time_slots .time_slot:hover {
+    background-color: rgb(244, 248, 255);
+}
+
+.booking-time_slots .time_slots .time_slot-radio:checked + .time_slot-label {
+	background-color: #2FA2FF;
+	border: 1px solid #2FA2FF;
+    color: #fff;
+}
+
+.booking-time_slots_title,
+.booking-form_calendar_title,
+.booking-form .gform_page_fields .gform-field-label {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+
+#gfield_instruction_1_18 {
+	display: none;
+}
+
+.booking-form .booking-form_players_field {
+	display: flex;
+    flex-wrap: wrap;
+}
+
+.booking-form .booking-form_players_field label {
+	width: 100%;
+}
+
+.booking-form .booking-form_players_field .ginput_container_number {
+	flex: 1;
+    order: 2;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.booking-form .booking-form_players_field .ginput_container_number input.small {
+	inline-size: 60px;
+}
+
+.booking-form .booking-form_players_field  .gfield_description {
+	flex: 1;
+}
+
+.booking-items.hidden,
+.booking-item.hidden,
+.booking-wrapper.hidden,
+.back_btn.hidden {
+	display: none;
+}

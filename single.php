@@ -269,14 +269,11 @@
             </section>
         <?php } ?>
 
-        <?php if(!get_field('hide_bl4')) { ?>
-            <section class="plugin" id="bookblock">
-                <div class="container">
-                    <?php the_field('bookingscript'); ?>
-                </div>
-            </section>
-        <?php } ?>
-
+        <?php  
+            $test_games_ids = getLocationGamesFromApi();
+            get_template_part('template-parts/single', 'booking_games_list', ['test_games_ids' => $test_games_ids]);
+        ?>
+        
         <?php if(!get_field('hide_bl9')) { ?>
             <section class="contacts">
                 <div class="container">

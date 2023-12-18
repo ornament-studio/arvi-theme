@@ -1,3 +1,4 @@
+(function($) {
 $(document).ready(function(){
 
     // Change url ids when page is scrolling
@@ -273,3 +274,4 @@ $(document).ready(function(){
     });
     
 })
+})(jQuery)
