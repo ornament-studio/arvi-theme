@@ -21,13 +21,18 @@ function enqueue_file() {
     wp_enqueue_style( 'rSlider_css', get_template_directory_uri() . '/css/rSlider.min.css','', null );
 	wp_enqueue_style( 'main_css', get_template_directory_uri() . '/css/main.css','', null );
 	// js
-	wp_enqueue_script( 'jquery_js', get_stylesheet_directory_uri() . '/js/jquery-3.7.0.min.js','','',true);
-	wp_enqueue_script( 'slick_js', get_stylesheet_directory_uri() . '/js/slick.min.js','','',true);
-	wp_enqueue_script( 'main_js', get_stylesheet_directory_uri() . '/js/main.js','','',true);
 	// wp_enqueue_script( 'jquery_js', get_stylesheet_directory_uri() . '/js/jquery-3.7.0.min.js','','',true);
 	wp_enqueue_script( 'slick_js', get_stylesheet_directory_uri() . '/js/slick.min.js', array( 'jquery' ),'',true);
+    wp_enqueue_script( 'datepicker', get_stylesheet_directory_uri() . '/js/jquery-ui-datepicker.min.js','','',true);
+    wp_enqueue_script( 'arrive', get_stylesheet_directory_uri() . '/js/arrive.min.js','','',true);
 	wp_enqueue_script( 'main_js', get_stylesheet_directory_uri() . '/js/main.js', array( 'jquery' ),'',true);
     wp_enqueue_script( 'rSlider_js', get_stylesheet_directory_uri() . '/js/rSlider.min.js','','',true);
+    wp_enqueue_script( 'booking_js', get_stylesheet_directory_uri() . '/js/booking.js', array( 'jquery' ),'',true);
+    // js data
+    wp_localize_script('booking_js', 'booking_js_data', [
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'ajax_nonce' => wp_create_nonce(),
+    ]);
 }
 
 function print_svg($file){
@@ -231,4 +236,78 @@ function addLangSwitcherToMenu ($items, $args) {
     return $items;
 }
 add_filter('wp_nav_menu_items', 'addLangSwitcherToMenu', 10, 2);
+
+// Add AJAX handlers for Booking block
+add_action('wp_ajax_booking_open_game', 'bookingOpenGame');
+add_action('wp_ajax_nopriv_booking_open_game', 'bookingOpenGame');
+
+function bookingOpenGame() {
+    if (!wp_verify_nonce($_POST['_wpnonce'])) {
+        die;
+    }
+
+    $result = [];
+
+    ob_start();
+    get_template_part('template-parts/single', 'booking_game', ['game_id' => $_POST['gameId']]);
+    $result['game_item_tmp'] = ob_get_contents();
+    ob_get_clean();
+    get_template_part('template-parts/single', 'booking_time_slots', ['time_slots' => getTimeSlotsByDateFromApi()]);
+    $result['time_slots_tmp'] = ob_get_contents();
+    ob_get_clean();
+    
+    return wp_send_json_success($result);
+}
+
+add_action('wp_ajax_booking_all_games', 'bookingAllGames');
+add_action('wp_ajax_nopriv_booking_all_games', 'bookingAllGames');
+
+function bookingAllGames() {
+    if (!wp_verify_nonce($_POST['_wpnonce'])) {
+        die;
+    }
+
+    $test_games_ids = getLocationGamesFromApi();
+    get_template_part('template-parts/single', 'booking_games_list', ['test_games_ids' => $test_games_ids]);
+    die;
+}
+
+function decode_field($value, $entry, $field, $input_id) {
+    $value = 'game1';
+    return $value;
+}
+
+function getLocationGamesFromApi() {
+    return [360, 300, 316, 326, 416];
+}
+
+add_action('wp_ajax_booking_get_time_slots', 'bookingGetTimeSlots');
+add_action('wp_ajax_nopriv_booking_get_time_slots', 'bookingGetTimeSlots');
+
+function bookingGetTimeSlots() {
+    if (!wp_verify_nonce($_POST['_wpnonce'])) {
+        die;
+    }
+    $test_time_slots = getTimeSlotsByDateFromApi();
+
+    get_template_part('template-parts/single', 'booking_time_slots', ['time_slots' => $test_time_slots]);
+    die;
+}
+
+function getTimeSlotsByDateFromApi() {
+    $time_slots = [];
+    for ($i = 1; $i < mt_rand(2, 5); $i++) { 
+        $randDate = new DateTime();
+        $randDate->setTime(mt_rand(9 + $i, 9 + $i*2), '00');
+
+        $time_slots[] = [
+            'text' => $randDate->format('H:i'),
+            'value' => $randDate->format('H:i'),
+            'isSelected' => '',
+            'price' => ''
+        ];
+    }
+    return $time_slots;
+}
+
 ?>
