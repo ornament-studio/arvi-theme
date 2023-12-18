@@ -1,3 +1,4 @@
+(function($) {
 $(document).ready(function(){
     if($('.reviews_slider').length > 0) {
         $('.reviews_slider').slick({
@@ -256,3 +257,4 @@ $(document).ready(function(){
     });
     
 })
+})(jQuery)
