@@ -71,15 +71,17 @@
                     <path d="M1285.41 67.0843V89.7869H1220.71V67.0843H1285.41ZM1234.3 40.986H1267.75V137.812C1267.75 140.593 1268.08 142.76 1268.74 144.312C1269.4 145.8 1270.53 146.867 1272.11 147.514C1273.77 148.096 1275.95 148.387 1278.66 148.387C1280.58 148.387 1282.17 148.354 1283.43 148.29C1284.68 148.16 1285.88 147.999 1287 147.805V171.186C1284.15 172.092 1281.18 172.771 1278.07 173.224C1274.96 173.741 1271.65 174 1268.14 174C1261 174 1254.88 172.9 1249.78 170.701C1244.76 168.502 1240.92 165.042 1238.27 160.32C1235.62 155.599 1234.3 149.454 1234.3 141.886V40.986Z" fill="#3865DB"/>
                 </svg>
                 </a>
-                <div class="menuwrap">
+                <?php
+                    $show_menu = true;
+                    if (get_post_type() == 'location' && !get_field('show_menu')) {
+                        $show_menu = false;
+                    }
+                ?>
+                <div class="menuwrap <?=$show_menu?'':'only_lang'?>">
                     <div class="show-mb menuclose">
                         <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M512 0C229.232 0 0 229.232 0 512c0 282.784 229.232 512 512 512 282.784 0 512-229.216 512-512C1024 229.232 794.784 0 512 0zm0 961.008c-247.024 0-448-201.984-448-449.01 0-247.024 200.976-448 448-448s448 200.977 448 448-200.976 449.01-448 449.01zm181.008-630.016c-12.496-12.496-32.752-12.496-45.248 0L512 466.752l-135.76-135.76c-12.496-12.496-32.752-12.496-45.264 0-12.496 12.496-12.496 32.752 0 45.248L466.736 512l-135.76 135.76c-12.496 12.48-12.496 32.769 0 45.249 12.496 12.496 32.752 12.496 45.264 0L512 557.249l135.76 135.76c12.496 12.496 32.752 12.496 45.248 0 12.496-12.48 12.496-32.769 0-45.249L557.248 512l135.76-135.76c12.512-12.512 12.512-32.768 0-45.248z"/></svg>
                     </div>
 					<?php
-                    if(get_post_type() == 'location' && !get_field('show_menu')) {
-
-                    }
-                    else {
 						$args_main_menu = array( 
 							'theme_location'=>'top',
 							'container'=> false,
@@ -87,7 +89,6 @@
 							'depth'=> 0
 						);
 						wp_nav_menu($args_main_menu);
-                    }
 					?>
                 </div>
                 <div class="rowmob row">
@@ -101,8 +102,7 @@
                     ?>
                         <a href="<?php echo $header_link['url']; ?>" target="<?php echo $header_link['target']; ?>" class="link"><span><?php echo $header_link['title']; ?></span></a>
                     <?php } ?>
-                    <?php if(get_post_type() == 'location' && !get_field('show_menu')) : ?>
-                    <?php else : ?>
+                    
                     <a href="#" class="show-mb mobbutton">
                         <svg version="1.1"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
                             <g>
@@ -113,7 +113,6 @@
                             </g>
                         </svg>
                     </a>
-                    <?php endif;  ?>
                 </div>
             </div>
         </div>

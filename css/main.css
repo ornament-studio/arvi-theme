@@ -634,6 +634,17 @@ header .menu li a:hover {
   margin-right: 6px;
   margin-bottom: 10px;
 }
+.aboutgame_info-good li.clickable {
+  transition: box-shadow 0.4s;
+  cursor: pointer;
+}
+.aboutgame_info-good li.clickable:hover {
+  box-shadow: inset 0px 0px 3px 2px #2FA2FF;
+}
+.aboutgame_info-good li a {
+  text-decoration: none;
+  color: #1C1C3B;
+}
 .aboutgame_image {
   width: 52%;
   line-height: 0;
@@ -744,6 +755,9 @@ header .menu li a:hover {
   font-weight: 500;
   line-height: 1.6;
 }
+a.gameinfo_item-text {
+  margin-top: 0;
+}
 .gameinfo_item-text span {
   font-weight: 700;
 }
@@ -808,6 +822,7 @@ header .menu li a:hover {
   width: auto;
   transition: filter 0.4s;
   cursor: pointer;
+  object-fit: cover;
 }
 .galery img:hover {
   filter: contrast(125%);
@@ -1730,6 +1745,40 @@ header .menu li a:hover {
 .gamefilter.inside .gamefilter_reset {
   display: inline-block;
 }
+.lang_switcher {
+  position: relative;
+  display: inline-block;
+}
+.lang_switcher-other_langs {
+  display: none;
+  position: absolute;
+  right: -15px;
+  background-color: #f9f9f9;
+  width: auto;
+  box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+.lang_switcher:hover .lang_switcher-other_langs {
+  display: block;
+}
+.lang_switcher-lang_title,
+.lang_switcher-lang_link {
+  font-weight: 700;
+  color: #1C1C3B;
+  text-decoration: none;
+  transition: color 0.4s;
+  cursor: pointer;
+}
+.lang_switcher-lang_link:hover {
+  color: #2FA2FF;
+}
+.header .menuwrap.only_lang {
+  width: 70%;
+  display: flex;
+  justify-content: flex-end;
+}
+
 @media (max-width: 1400px) {
   header .logo {
     width: 150px;
@@ -1846,6 +1895,9 @@ header .menu li a:hover {
   header .menu li {
     margin-right: 40px;
   }
+  .header .menuwrap.only_lang {
+    width: 60%;
+  }
   .modal_img video {
     width: 700px;
   }
@@ -1945,6 +1997,9 @@ header .menu li a:hover {
   }
   header .menu {
     margin-left: 0;
+    max-width: 365px;
+    align-items: center;
+    text-align: center;
   }
   header .menu li {
     margin-right: 25px;
@@ -2019,9 +2074,12 @@ header .menu li a:hover {
   }
   .reviews_item {
     margin: 0 10px;
+    flex-direction: column-reverse;
   }
   .reviews_item-image {
-    display: none;
+    width: 330px;
+    height: 230px;
+    margin: 20px auto 0;
   }
   .reviews_item-content {
     width: 100%;
@@ -2301,6 +2359,12 @@ header .menu li a:hover {
   .mobbutton path {
     fill: #1C1C3B;
   }
+  header .menu {
+    align-items: flex-start;
+  }
+  .header .menuwrap.only_lang {
+    justify-content: flex-start;
+  }
   .header .menuwrap {
     padding: 70px 20px 40px;
     position: fixed;
@@ -2371,7 +2435,7 @@ header .menu li a:hover {
     width: calc(50% - 20px);
   }
   .galery img {
-    height: 240px;
+    height: 440px;
   }
   .aboutgame_slider .slider_arrow.slider_prew {
     left: 12px;
@@ -2405,6 +2469,33 @@ header .menu li a:hover {
   }
   body {
     padding-top: 75px;
+  }
+  .reviews_item-image {
+    width: 230px;
+  }
+  .lang_switcher {
+    position: relative;
+    display: flex;
+  }
+  .lang_switcher-other_langs {
+    display: block;
+    position: initial;
+    background-color: unset;
+    box-shadow: none;
+    padding: 0;
+    z-index: unset;
+  }
+  .lang_switcher-lang_link,
+  .lang_switcher-lang_title {
+    font-size: 17px;
+    color: #FFFFFF;
+  }
+  .lang_switcher-active_lang,
+  .lang_switcher-lang_item {
+    margin-right: 20px;
+  }
+  .lang_switcher-active_lang span {
+    text-decoration: underline;
   }
 }
 @media (max-width: 576px) {
@@ -2450,12 +2541,13 @@ header .menu li a:hover {
     width: 100%;
   }
   .galery img {
-    height: 220px;
+    height: 440px;
   }
   .galery_area {
     margin: 0 -5px;
   }
   .galery .slick-slide {
+    width: 300px;
     margin: 0 5px;
   }
   .slick-dots li button {
@@ -2468,7 +2560,7 @@ header .menu li a:hover {
 }
 @media (max-width: 480px) {
   .galery img {
-    height: 220px;
+    height: 440px;
   }
   .modal_img video {
     width: 270px;
@@ -2502,4 +2594,9 @@ header .menu li a:hover {
   .mobbutton {
     width: 30px;
   }
+}
+
+.header,
+.header .menuwrap {
+  top: 46px !important;
 }

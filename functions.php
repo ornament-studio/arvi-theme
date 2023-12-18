@@ -60,6 +60,31 @@ function create_location_category(){
 }
 add_action('init', 'create_location_category');
 
+function create_location_tags(){
+    register_taxonomy(
+        'locations_tags',
+        'location_tag',
+        array(
+            'labels' => array(
+                'name'              => 'Теги',
+                'singular_name'     => 'Теги',
+                'search_items'      => 'Пошук тегів',
+                'all_items'         => 'Всі теги',
+                'edit_item'         => 'Редагувати тег',
+                'update_item'       => 'Оновити тег',
+                'add_new_item'      => 'Додати новий тег',
+                'new_item_name'     => 'Назва тега',
+                'menu_name'         => 'Теги',
+            ),
+            'hierarchical' => false,
+            'sort' => true,
+            'args' => array('orderby' => 'term_order'),
+            'show_admin_column' => true
+        )
+    );
+}
+add_action('init', 'create_location_tags');
+
 function create_custom_post_type_location() {
     $labels = array(
         'name' => 'Сторінка для локації',
@@ -87,7 +112,7 @@ function create_custom_post_type_location() {
         'has_archive' => false,
         'hierarchical' => true,
         'menu_position' => null,
-        'taxonomies' => array('locations'),
+        'taxonomies' => array('locations', 'locations_tags'),
         'supports' => array('title', 'editor', 'thumbnail', 'page-attributes')
     );
     register_post_type('location', $args);
@@ -165,5 +190,42 @@ add_image_size( '250-250', 250, 250, false);
 add_image_size( '125-125', 125, 125, false);
 add_image_size( '50-50', 50, 50, false);
 
+// Add custom language WPML switcher to top menu
+function addLangSwitcherToMenu ($items, $args) {
+    $languages = apply_filters('wpml_active_languages', NULL, array('skip_missing' => 1, 'orderby=id&order=desc'));
+    $lang_switcher = '';
+    
+    if (!empty($languages) && count($languages) > 1) {
+        $active_lang = '<div class="lang_switcher-active_lang">';
+        $other_langs = '<div class="lang_switcher-other_langs">';
+        
+        foreach ($languages as $language) {
+            if ($language['active']) {
+                $active_lang .= '<span class="lang_switcher-lang_title">' . $language['native_name'] . '</span>';
+            }
+            else {
+                $other_langs .= 
+                    '<div class="lang_switcher-other_langs-lang_item">
+                        <a class="lang_switcher-lang_link" href="' . esc_url($language['url']) . '">' . 
+                            $language['native_name'] . '
+                        </a>
+                    </div>';
+            }
+        }
 
+        $active_lang .= '</div>';
+        $other_langs .= '</div>';
+        $lang_switcher .= '<div class="lang_switcher">' . $active_lang . $other_langs . '</div>';
+    }
+
+    if ($args->theme_location == 'top' && get_post_type() == 'location' && !get_field('show_menu')) {
+        $items = $lang_switcher;
+    }
+    elseif ($args->theme_location == 'top') {
+        $items .= $lang_switcher;
+    }
+    
+    return $items;
+}
+add_filter('wp_nav_menu_items', 'addLangSwitcherToMenu', 10, 2);
 ?>

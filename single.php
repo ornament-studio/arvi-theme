@@ -22,14 +22,21 @@
                             <?php if(!empty(get_field('mintitle_bl1'))) { ?>
                                 <p class="aboutgame_info-title black"><?php the_field('mintitle_bl1'); ?></p>
                             <?php } ?>
-                            
-                            <?php if(!empty(get_field('tegsglobal'))) { ?>
+
+                            <?php if (have_rows('location-tags-list')): ?>
                                 <ul class="aboutgame_info-good">
-                                    <?php foreach(get_field('tegsglobal') as $key => $value) { ?>
-                                        <li><?php echo $value; ?></li>
-                                    <?php } ?>
+                                <?php while (have_rows('location-tags-list')): the_row(); 
+                                    $tag = get_sub_field('location-tags-tag-name');
+                                    $link = get_sub_field('location-tags-tag-link');
+                                    ?>
+                                    <?php if ($link): ?>
+                                        <li class="clickable"><a href="<?=$link['url'] ?>"><?=get_term($tag)->name?></a></li>
+                                    <?php else: ?>
+                                        <li><p><?=get_term($tag)->name?></p></li>
+                                    <?php endif; ?>
+                                <?php endwhile; ?>
                                 </ul>
-                            <?php } ?>
+                            <?php endif; ?>
 
                             <?php if(!empty(get_field('links_bl1'))) { ?>
                                 <div class="main_buttons">
@@ -103,6 +110,20 @@
                             </div>
                         <?php }} ?>
                     </div>
+                </div>
+            </section>
+        <?php } ?>
+
+        <?php if(!get_field('hide_bl5')) { ?>
+            <section class="galery">
+                <div class="container">
+                    <?php if(!empty(get_field('slider_bl5'))) { ?>
+                        <div class="galery_area">
+                            <?php foreach(get_field('slider_bl5') as $item) {
+                                echo wp_get_attachment_image($item['img']['id'], '300'); 
+                            } ?>
+                        </div>
+                    <?php } ?>
                 </div>
             </section>
         <?php } ?>
@@ -197,21 +218,6 @@
             </section>
         <?php } ?>
 
-
-        <?php if(!get_field('hide_bl5')) { ?>
-            <section class="galery">
-                <div class="container">
-                    <?php if(!empty(get_field('slider_bl5'))) { ?>
-                        <div class="galery_area">
-                            <?php foreach(get_field('slider_bl5') as $item) {
-                                echo wp_get_attachment_image($item['img']['id'], '300'); 
-                            } ?>
-                        </div>
-                    <?php } ?>
-                </div>
-            </section>
-        <?php } ?>
-
         <?php if(!get_field('hide_bl6')) { ?>
             <section class="reviews">
                 <div class="container">
@@ -243,9 +249,7 @@
                                                         <p class="reviews_item-text">"<?php echo $item['text']; ?></p>
                                                     <?php } ?>
                                                 </div>
-                                                <div class="reviews_item-minimage ofc">
-                                                    <?php echo wp_get_attachment_image($item['img']['id'], '50-50'); ?>
-                                                </div>
+                                                
                                                 <div class="reviews_item-info">
                                                     <?php if(!empty($item['name'])) { ?>
                                                         <p><?php echo $item['name']; ?></p>
