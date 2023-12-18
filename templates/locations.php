@@ -25,8 +25,9 @@ get_header();
                     ));
 
                     foreach ( $categories as $category )  { 
-                    
+
                 ?>
+                    <a class="anchor" id="<?=strtolower($category->slug)?>"></a>
                     <div class="locations_area">
                         <h2 class="locations_title"><?php echo $category->cat_name; ?></h2>
                         <div class="locations_items">
