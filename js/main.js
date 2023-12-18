@@ -1,5 +1,22 @@
 (function($) {
 $(document).ready(function(){
+
+    // Change url ids when page is scrolling
+    var currentHash = "#"
+    $(document).scroll(function () {
+        $('.anchor').each(function () {
+            var top = window.pageYOffset;
+            var distance = top - $(this).offset().top;
+            var hash = $(this).attr('id');
+            // 30 is an arbitrary padding choice, 
+            // if you want a precise check then use distance===0
+            if (distance < 30 && distance > -30 && currentHash != hash) {
+                window.location.hash = (hash);
+                currentHash = hash;
+            }
+        });
+    });
+
     if($('.reviews_slider').length > 0) {
         $('.reviews_slider').slick({
             slidesToShow: 2,
