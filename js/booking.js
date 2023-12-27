@@ -1,8 +1,13 @@
 (function($) {
 $(document).ready(function() {
-	var inputGamersCount = '#input_1_18'
+	var inputPlayersCount = '#input_1_17'
 	var inputDate = '#input_1_9'
 	var inputGameId = '#input_1_6'
+    var inputTime = '#input_1_22'
+    var inputTotalSum = '#input_1_13'
+    var playersMaxCount = 8
+    var gamePrices = {}
+    var totalSum = 0
 
 	var aboutGameSlider = (selector) => {
         $(selector).slick({
@@ -105,11 +110,23 @@ $(document).ready(function() {
                     aboutGameSlider('.aboutgame_slider');
                 }
                 $('#bookblock .booking-wrapper').removeClass('hidden');
+
+                playersMaxCount = res.data.max_players;
+                gamePrices = res.data.prices;
+                generatePlayersCountFieldDescription($('.booking-form_players-field-description'), gamePrices);
             }
         }).done(() => {
             turnOffSpinner()
         })
     });
+
+    // Generate description for Players field
+    var generatePlayersCountFieldDescription = (selector, prices) => {
+        $.each(prices, (key, val) => {
+            if (val['show'])
+                selector.append($('<p>$' + val['price'] + ' for ' + val['players'] + ' player(s)</p>'));
+        });
+    };
 
     // AJAX request for getting all games
     $(document).on('click', '#gamelist_back_btn', function(e) {
