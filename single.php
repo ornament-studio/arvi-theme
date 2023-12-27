@@ -170,54 +170,6 @@
             </section>
         <?php } ?>
 
-        <?php if(!get_field('hide_bl8')) { ?>
-            <section class="gamelist">
-                <div class="container">
-                    <?php if(!empty(get_field('title_bl8'))) { ?>
-                        <h2 class="title"><?php the_field('title_bl8'); ?></h2>
-                    <?php } ?>
-                    <div class="gamelist_items">
-                        <?php 
-                            if (!empty(get_field('games_bl8'))) {
-                                $games_id = array();
-                                foreach (get_field('games_bl8') as $item) {
-                                    array_push($games_id, $item['game']);
-                                }
-                            } else {
-                                $games_id = false;
-                            }
-                            $page_id = get_the_ID();
-                            if ($games_id) {
-                                $args = array(
-                                    'post_type' => 'game',
-                                    'post_status' => 'publish',
-                                    'posts_per_page' => -1, 
-                                    'orderby' => 'title', 
-                                    'post__in' => $games_id,
-                                    'order' => 'ASC', 
-                                );
-                                $loop_key = 0;
-                                $loop = new WP_Query($args);
-                                while ( $loop->have_posts() ) { $loop->the_post(); 
-                        ?>
-                            <a href="<?php the_permalink(); ?>?locationid=<?php echo $page_id; ?>" class="gamelist_item">
-                                <div class="gamelist_item-bg"></div>
-                                <?php echo get_the_post_thumbnail(get_the_ID(), '300-300', array( 'class' => 'gamelist_item-img' )); ?>
-                                <div class="gamelist_item-top">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/img/player_ico.png" alt="Up to <?php the_field('playersmax_bl2'); ?> players">
-                                    <p>Up to <?php the_field('playersmax_bl2'); ?></p>
-                                </div>
-                                <div class="gamelist_item-bottom">
-                                    <h2 class="gamelist_item-title"><?php the_field('title_bl1'); ?></h2>
-                                    <p   class="gamelist_item-text"><?php echo substr(get_field('subtitle_bl1'), 0, 80);  ?></p>
-                                </div>
-                            </a>
-                        <?php $loop_key++; } wp_reset_postdata(); } ?>
-                    </div>
-                </div>
-            </section>
-        <?php } ?>
-
         <?php if(!get_field('hide_bl6')) { ?>
             <section class="reviews">
                 <div class="container">
@@ -270,7 +222,14 @@
         <?php } ?>
 
         <?php  
-            $test_games_ids = getLocationGamesFromApi();
+            // $test_games_ids = getLocationGamesFromApi();
+            $test_games_ids = [];
+            if (have_rows('games_bl8')):
+                while (have_rows('games_bl8')) : the_row();
+                    $test_games_ids[] = get_sub_field('game');
+                    
+                endwhile;
+            endif;
             get_template_part('template-parts/single', 'booking_games_list', ['test_games_ids' => $test_games_ids]);
         ?>
         
