@@ -233,5 +233,11 @@ $(document).ready(function() {
             decrementValue(e);
         });
     });
+
+    // Save Time Slot to hidden field
+    $(document).on('click', '.time_slot-label', function(e) {
+        var timeslot_value = $('#' + $(this).attr('for')).val();
+        $(inputTime).val(timeslot_value);
+    });
 })
 })(jQuery)
