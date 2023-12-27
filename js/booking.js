@@ -164,6 +164,13 @@ $(document).ready(function() {
         }
     })
 
+    // Track Players field description block and if it content is empty regenerate content
+    document.arrive('.booking-form_players-field-description', function(newElem) {
+        if ($(this).text().trim().length == 0 && $('#gform_page_1_1').is(":visible") && !$.isEmptyObject(gamePrices)) {
+            generatePlayersCountFieldDescription($(this), gamePrices);
+        }
+    })
+
     function getPriceByPlayer(players, prices) {
         var price = 0;
         $.each(prices, (key, value) => {
