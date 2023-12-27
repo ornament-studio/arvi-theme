@@ -1,5 +1,8 @@
 <section class="gamelist booking" id="bookblock">
 	<div class="container">
+		<?php if(!empty(get_field('title_bl8'))) { ?>
+            <h2 class="title"><?php the_field('title_bl8'); ?></h2>
+        <?php } ?>
 		<div id="overlay">
 			<div class="cv-spinner">
 				<span class="spinner"></span>
@@ -16,7 +19,7 @@
 				<?php gravity_form(1, false, false, false, '', true, 12); ?>
 			</div>
 		</div>
-		<div class="gamelist_items booking-items">
+		<div class="booking-items">
 			<?php foreach ($args['test_games_ids'] as $game_id) { ?>
 				<a href="?game=<?=$game_id?>" class="gamelist_item" id="gamelist_item" data-game-id="<?=$game_id?>">
 					<div class="gamelist_item-bg"></div>
