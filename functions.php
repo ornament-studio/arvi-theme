@@ -32,6 +32,7 @@ function enqueue_file() {
     wp_localize_script('booking_js', 'booking_js_data', [
         'ajaxurl' => admin_url('admin-ajax.php'),
         'ajax_nonce' => wp_create_nonce(),
+        'current_id' => get_the_ID(),
     ]);
 }
 
@@ -260,7 +261,28 @@ function bookingOpenGame() {
     get_template_part('template-parts/single', 'booking_time_slots', ['time_slots' => getTimeSlotsByDateFromApi()]);
     $result['time_slots_tmp'] = ob_get_contents();
     ob_get_clean();
-    
+
+    $current_id = $_POST['current_id'];
+
+    if (have_rows('games_bl8', $current_id)):
+        while (have_rows('games_bl8', $current_id)) : the_row();
+            if (get_sub_field('game', $current_id) == $_POST['gameId']) {
+                if (have_rows('booking_location_prices', $current_id)):
+                    $count = 0;
+                    while (have_rows('booking_location_prices', $current_id)) : the_row();
+                        $result['prices'][$count]['players'] = get_sub_field('players_count');
+                        $result['prices'][$count]['price'] = get_sub_field('players_count_price');
+                        $result['prices'][$count]['show'] = get_sub_field('players_count_price_show');
+                        $count++;
+                    endwhile;
+                endif;
+            }
+            
+        endwhile;
+    endif;
+
+    $result['max_players'] = $count;
+
     return wp_send_json_success($result);
 }
 
