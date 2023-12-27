@@ -37,9 +37,14 @@ function enqueue_file() {
 
 function print_svg($file){
     if($file) {
-        $iconfile = new DOMDocument();
-        $iconfile->load($file);
-        echo $iconfile->saveHTML($iconfile->getElementsByTagName('svg')[0]);
+        $arrContextOptions=array(
+            "ssl"=>array(
+                "verify_peer"=>false,
+                "verify_peer_name"=>false,
+            ),
+        );  
+
+        echo file_get_contents($file, false, stream_context_create($arrContextOptions));
     }
 }
 
