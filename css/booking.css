@@ -22,6 +22,12 @@
 	margin-right: 10px;
 }
 
+.booking-items {
+	margin: 0;
+	display: flex;
+    flex-wrap: wrap;
+}
+
 .booking-wrapper {
 	display: flex;
 }
@@ -187,6 +193,7 @@
 /*    inline-size: 300px;*/
     padding-block: 16px;
     padding-inline: 16px;
+    border-radius: 10px;
 }
 
 .booking-form_calendar .ui-datepicker-header {
@@ -330,27 +337,25 @@
 
 .booking-time_slots_title,
 .booking-form_calendar_title,
-.booking-form .gform_page_fields .gform-field-label {
+.booking-form .gform_page_fields .gform-field-label,
+.booking-form_field-label {
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 20px;
 }
 
+/* Players custom field */
 
-#gfield_instruction_1_18 {
-	display: none;
-}
-
-.booking-form .booking-form_players_field {
+#field_1_21 {
 	display: flex;
     flex-wrap: wrap;
 }
 
-.booking-form .booking-form_players_field label {
+#field_1_21 .booking-form_players_field label {
 	width: 100%;
 }
 
-.booking-form .booking-form_players_field .ginput_container_number {
+#field_1_21 .booking-form_players_field .ginput_container_number {
 	flex: 1;
     order: 2;
     display: flex;
@@ -358,13 +363,58 @@
     justify-content: right;
 }
 
-.booking-form .booking-form_players_field .ginput_container_number input.small {
+#field_1_21 .booking-form_players_field .ginput_container_number input.small {
 	inline-size: 60px;
 }
 
-.booking-form .booking-form_players_field  .gfield_description {
+#field_1_21 .booking-form_players_field  .gfield_description {
 	flex: 1;
 }
+
+#field_1_21 .booking-form_players-field-description {
+	width: 100%;
+	text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+#field_1_21 .booking-form_players-field-description p {
+	display: inline-block;
+	width: 100%;
+	color: #cfd3d9;
+}
+
+#field_1_21 .booking-form_players-field {
+	display: flex;
+	border: 1px solid #D4D4D4;
+    width: fit-content;
+    height: fit-content;
+    margin: 0 auto;
+    padding: 6px;
+    border-radius: 25px;
+}
+
+#field_1_21 .button-minus,
+#field_1_21 .button-plus {
+	cursor: pointer;
+	background-color: #2FA2FF;
+	font-size: 20px;
+	width: 38px;
+	height: 38px;
+	padding: 0;
+	border-radius: 50%;
+}
+
+#field_1_21 .booking-form_players-field input[type="text"] {
+	width: 50px;
+	text-align: center;
+	border: none;
+	font-size: 30px;
+	box-shadow: none;
+	background: none;
+}
+
 
 .booking-items.hidden,
 .booking-item.hidden,
