@@ -299,11 +299,6 @@ function bookingAllGames() {
     die;
 }
 
-function decode_field($value, $entry, $field, $input_id) {
-    $value = 'game1';
-    return $value;
-}
-
 function getLocationGamesFromApi() {
     return [360, 300, 316, 326, 416];
 }
