@@ -160,6 +160,57 @@ $(document).ready(function() {
         }
     })
 
+    function incrementValue(e) {
+        e.preventDefault();
+        var fieldName = $(e.target).data('field');
+        var parent = $(e.target).closest('div');
+        var currentVal = parseInt($(inputPlayersCount).val(), 10);
 
+        if (!isNaN(currentVal) && currentVal < playersMaxCount) {
+            parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
+            $(inputPlayersCount).val(currentVal + 1);
+            totalSum = getPriceByPlayer(currentVal + 1, gamePrices)
+            $(inputTotalSum).val(totalSum);
+        } else {
+            // parent.find('input[name=' + fieldName + ']').val(1);
+        }
+    }
+
+    function decrementValue(e) {
+        e.preventDefault();
+        var fieldName = $(e.target).data('field');
+        var parent = $(e.target).closest('div');
+        var currentVal = parseInt($(inputPlayersCount).val(), 10);
+
+        if (!isNaN(currentVal) && currentVal > 1) {
+            parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
+            $(inputPlayersCount).val(currentVal - 1);
+            totalSum = getPriceByPlayer(currentVal - 1, gamePrices)
+            $(inputTotalSum).val(totalSum);
+        } else {
+            // parent.find('input[name=' + fieldName + ']').val(1);
+        }
+    }
+
+    $('.booking-form_players-field').on('click', '.button-plus', function(e) {
+        incrementValue(e);
+    });
+
+    $('.booking-form_players-field').on('click', '.button-minus', function(e) {
+        decrementValue(e);
+    });
+
+    // Track changes in Players field and rebind events
+    document.arrive(".booking-form_players-field", function(newElem) {
+        console.log('bind action on players field')
+        $('#quantity-field').val($(inputPlayersCount).val());
+        $('.booking-form_players-field').on('click', '.button-plus', function(e) {
+            incrementValue(e);
+        });
+
+        $('.booking-form_players-field').on('click', '.button-minus', function(e) {
+            decrementValue(e);
+        });
+    });
 })
 })(jQuery)
