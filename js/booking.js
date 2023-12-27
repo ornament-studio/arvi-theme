@@ -49,7 +49,8 @@ $(document).ready(function() {
             firstDay: 1,
             showOtherMonths: true,
             onSelect: (date) => {
-                getTimeSlots(date)
+                $(inputTime).val(0);
+                getTimeSlots(date);
             },
             ...options
         });
@@ -97,10 +98,11 @@ $(document).ready(function() {
             data: {
                 action: 'booking_open_game',
                 gameId: gameId,
+                current_id: booking_js_data.current_id,
                 _wpnonce: booking_js_data.ajax_nonce
             },
             success: (res) => {
-                console.log('booking_open_game - success');
+                // console.log(res);
                 $('#bookblock .booking-items').addClass('hidden');
                 $('#bookblock .booking-item').html(res.data.game_item_tmp);
                 $('#bookblock .booking-time_slots').html(res.data.time_slots_tmp);
@@ -114,6 +116,8 @@ $(document).ready(function() {
                 playersMaxCount = res.data.max_players;
                 gamePrices = res.data.prices;
                 generatePlayersCountFieldDescription($('.booking-form_players-field-description'), gamePrices);
+                totalSum = getPriceByPlayer(1, gamePrices);
+                $(inputTotalSum).val(totalSum);
             }
         }).done(() => {
             turnOffSpinner()
@@ -159,6 +163,16 @@ $(document).ready(function() {
             getTimeSlots()
         }
     })
+
+    function getPriceByPlayer(players, prices) {
+        var price = 0;
+        $.each(prices, (key, value) => {
+            if (value['players'] == players) {
+                price = value['price'] * players
+            }
+        })
+        return '$' + price + '.00';
+    }
 
     function incrementValue(e) {
         e.preventDefault();
