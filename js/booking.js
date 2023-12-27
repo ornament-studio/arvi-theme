@@ -158,9 +158,9 @@ $(document).ready(function() {
 
     // Track changes in booking form and turn on datepicker again if GF plagin disable it
     document.arrive(".booking-form_calendar", function(newElem) {
-        if ($(this).is(':empty')) {
-            enableDatepicker($(this), {defaultDate: $(inputDate).val()})
-            getTimeSlots()
+        if ($(this).is(':empty') && $('#gform_page_1_1').is(":visible")) {
+            enableDatepicker($(this), {defaultDate: $(inputDate).val()});
+            getTimeSlots();
         }
     })
 
