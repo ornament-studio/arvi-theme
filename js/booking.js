@@ -1,6 +1,8 @@
 (function($) {
 $(document).ready(function() {
-	var inputPlayersCount = '#input_1_17'
+	var inputPlayersCount = '#input_1_44'
+    var playersCount = '#input_1_21'
+    var inputPlayersCountDescription = '.booking-form_players-field-description'
 	var inputDate = '#input_1_9'
 	var inputGameId = '#input_1_6'
     var inputTime = '#input_1_22'
@@ -126,7 +128,7 @@ $(document).ready(function() {
 
                 playersMaxCount = res.data.max_players;
                 gamePrices = res.data.prices;
-                generatePlayersCountFieldDescription($('.booking-form_players-field-description'), gamePrices);
+                generatePlayersCountFieldDescription($(inputPlayersCountDescription), gamePrices);
                 totalSum = getPriceByPlayer(1, gamePrices);
                 $(inputTotalSum).val(totalSum);
             }
@@ -137,10 +139,12 @@ $(document).ready(function() {
 
     // Generate description for Players field
     var generatePlayersCountFieldDescription = (selector, prices) => {
+        selector.html('');
         $.each(prices, (key, val) => {
             if (val['show'])
-                selector.append($('<p>$' + val['price'] + ' for ' + val['players'] + ' player(s)</p>'));
+                selector.append($('<span>$' + val['price'] + ' for ' + val['players'] + ' player(s), </span>'));
         });
+        selector.text().substr(selector.text().length-2, 2);
     };
 
     // AJAX request for getting all games
@@ -176,7 +180,8 @@ $(document).ready(function() {
     })
 
     // Track Players field description block and if it content is empty regenerate content
-    document.arrive('.booking-form_players-field-description', function(newElem) {
+    document.arrive(inputPlayersCountDescription, function(newElem) {
+        console.log('generatePlayersCountFieldDescription')
         if ($(this).text().trim().length == 0 && $('#gform_page_1_1').is(":visible") && !$.isEmptyObject(gamePrices)) {
             generatePlayersCountFieldDescription($(this), gamePrices);
         }
