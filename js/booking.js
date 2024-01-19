@@ -116,7 +116,6 @@ $(document).ready(function() {
                 // console.log(res);
                 $('#bookblock .booking-items').addClass('hidden');
                 $('#bookblock .booking-item').html(res.data.game_item_tmp);
-                $('#bookblock .booking-time_slots').html(res.data.time_slots_tmp);
                 $(inputTimeSlots).html(res.data.time_slots_tmp);
                 $(inputGameId).val(gameId);
                 $('#bookblock .back_btn').removeClass('hidden');
