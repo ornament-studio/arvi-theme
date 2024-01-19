@@ -233,23 +233,23 @@ $(document).ready(function() {
         }
     }
 
-    $('.booking-form_players-field').on('click', '.button-plus', function(e) {
+    $('.booking-form_players-field .button-plus').on('click', function(e) {
+        console.log('origin - bind action on players field');
         incrementValue(e);
     });
 
-    $('.booking-form_players-field').on('click', '.button-minus', function(e) {
+    $('.booking-form_players-field .button-minus').on('click', function(e) {
         decrementValue(e);
     });
 
     // Track changes in Players field and rebind events
-    document.arrive(".booking-form_players-field", function(newElem) {
+    document.arrive(".quantity-field", function(newElem) {
         console.log('bind action on players field')
-        $('#quantity-field').val($(inputPlayersCount).val());
-        $('.booking-form_players-field').on('click', '.button-plus', function(e) {
+        $(playersCount).val($(inputPlayersCount).val());
+        $('.booking-form_players-field .button-plus').on('click', function(e) {
             incrementValue(e);
         });
-
-        $('.booking-form_players-field').on('click', '.button-minus', function(e) {
+        $('.booking-form_players-field .button-minus').on('click', function(e) {
             decrementValue(e);
         });
     });
