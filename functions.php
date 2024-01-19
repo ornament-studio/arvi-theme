@@ -253,12 +253,19 @@ function bookingOpenGame() {
     }
 
     $result = [];
+    $player_count = $_POST['players'];
+    $game_id = $_POST['game_id'];
+    $page_id = $_POST['current_id'];
+    $date = $_POST['date'];
+    $price = getPriceByPlayersCount($player_count, $page_id, $game_id);
+
+    $test_time_slots = getTimeSlotsByDateFromApi($date, $price);
 
     ob_start();
-    get_template_part('template-parts/single', 'booking_game', ['game_id' => $_POST['gameId']]);
+    get_template_part('template-parts/single', 'booking_game', ['game_id' => $game_id]);
     $result['game_item_tmp'] = ob_get_contents();
     ob_get_clean();
-    get_template_part('template-parts/single', 'booking_time_slots', ['time_slots' => getTimeSlotsByDateFromApi()]);
+    get_template_part('template-parts/single', 'booking_time_slots', ['time_slots' => $test_time_slots]);
     $result['time_slots_tmp'] = ob_get_contents();
     ob_get_clean();
 
@@ -266,7 +273,7 @@ function bookingOpenGame() {
 
     if (have_rows('games_bl8', $current_id)):
         while (have_rows('games_bl8', $current_id)) : the_row();
-            if (get_sub_field('game', $current_id) == $_POST['gameId']) {
+            if (get_sub_field('game', $current_id) == $_POST['game_id']) {
                 if (have_rows('booking_location_prices', $current_id)):
                     $count = 0;
                     while (have_rows('booking_location_prices', $current_id)) : the_row();
@@ -310,13 +317,45 @@ function bookingGetTimeSlots() {
     if (!wp_verify_nonce($_POST['_wpnonce'])) {
         die;
     }
-    $test_time_slots = getTimeSlotsByDateFromApi();
+    $player_count = $_POST['players'];
+    $game_id = $_POST['game_id'];
+    $page_id = $_POST['current_id'];
+    $date = $_POST['date'];
+    $price = getPriceByPlayersCount($player_count, $page_id, $game_id);
+
+    $test_time_slots = getTimeSlotsByDateFromApi($date, $price);
 
     get_template_part('template-parts/single', 'booking_time_slots', ['time_slots' => $test_time_slots]);
     die;
 }
 
-function getTimeSlotsByDateFromApi() {
+function getPriceByPlayersCount($player_count, $page_id, $game_id) {
+    $price = 0;
+    
+    if (have_rows('games_bl8', $page_id)) {
+        
+        while (have_rows('games_bl8', $page_id)) {
+            the_row();
+
+            if (get_sub_field('game', $page_id) == $game_id) {
+
+                if (have_rows('booking_location_prices', $page_id)) {
+
+                    while (have_rows('booking_location_prices', $page_id)) {
+                        the_row();
+
+                        if (get_sub_field('players_count') == $player_count) {
+                            $price = get_sub_field('players_count_price');
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return $price;
+}
+
+function getTimeSlotsByDateFromApi($date, $price) {
     $time_slots = [];
     for ($i = 1; $i < mt_rand(2, 5); $i++) { 
         $randDate = new DateTime();
@@ -326,7 +365,7 @@ function getTimeSlotsByDateFromApi() {
             'text' => $randDate->format('H:i'),
             'value' => $randDate->format('H:i'),
             'isSelected' => '',
-            'price' => ''
+            'price' => $price
         ];
     }
     return $time_slots;

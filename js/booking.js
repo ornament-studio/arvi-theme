@@ -4,6 +4,7 @@ $(document).ready(function() {
 	var inputDate = '#input_1_9'
 	var inputGameId = '#input_1_6'
     var inputTime = '#input_1_22'
+    var inputTimeSlots = '.booking-time_slots'
     var inputTotalSum = '#input_1_13'
     var playersMaxCount = 8
     var gamePrices = {}
@@ -49,8 +50,7 @@ $(document).ready(function() {
             firstDay: 1,
             showOtherMonths: true,
             onSelect: (date) => {
-                $(inputTime).val(0);
-                getTimeSlots(date);
+                getTimeSlots();
             },
             ...options
         });
@@ -68,20 +68,29 @@ $(document).ready(function() {
     }
 
     // Function for retrieving Time slots for selected date in Datepicker
-    var getTimeSlots = (date) => {
+    var getTimeSlots = () => {
         var gameId = $(inputGameId).val();
         $.ajax({
             url: booking_js_data.ajaxurl,
             type: 'POST',
             data: {
                 action: 'booking_get_time_slots',
-                gameId: gameId,
-                date: this.date,
+                game_id: gameId,
+                date: $(inputDate).val(),
+                current_id: booking_js_data.current_id,
+                players: $(inputPlayersCount).val(),
                 _wpnonce: booking_js_data.ajax_nonce
             },
             success: (res) => {
                 console.log('booking_get_time_slots - success');
-                $('#bookblock .booking-time_slots').html(res);
+                $(inputTimeSlots).html(res);
+                if ($(inputTime).val() != 0) {
+                    $('.time_slot-label').each((i, obj) => {
+                        if ($(obj).text() == $(inputTime).val()) {
+                            $('#' + $(obj).attr('for')).attr('checked', 'checked');
+                        }
+                    });
+                }
             }
         }).done(() => {
             turnOffSpinner()
@@ -106,6 +115,7 @@ $(document).ready(function() {
                 $('#bookblock .booking-items').addClass('hidden');
                 $('#bookblock .booking-item').html(res.data.game_item_tmp);
                 $('#bookblock .booking-time_slots').html(res.data.time_slots_tmp);
+                $(inputTimeSlots).html(res.data.time_slots_tmp);
                 $(inputGameId).val(gameId);
                 $('#bookblock .back_btn').removeClass('hidden');
                 if ($('.aboutgame_slider').length > 0) {
@@ -192,6 +202,7 @@ $(document).ready(function() {
             $(inputPlayersCount).val(currentVal + 1);
             totalSum = getPriceByPlayer(currentVal + 1, gamePrices)
             $(inputTotalSum).val(totalSum);
+            getTimeSlots();
         } else {
             // parent.find('input[name=' + fieldName + ']').val(1);
         }
@@ -208,6 +219,7 @@ $(document).ready(function() {
             $(inputPlayersCount).val(currentVal - 1);
             totalSum = getPriceByPlayer(currentVal - 1, gamePrices)
             $(inputTotalSum).val(totalSum);
+            getTimeSlots();
         } else {
             // parent.find('input[name=' + fieldName + ']').val(1);
         }
@@ -236,8 +248,10 @@ $(document).ready(function() {
 
     // Save Time Slot to hidden field
     $(document).on('click', '.time_slot-label', function(e) {
-        var timeslot_value = $('#' + $(this).attr('for')).val();
-        $(inputTime).val(timeslot_value);
+        console.log('Save Time Slot to hidden field');
+        var timeSlotValue = $('#' + $(this).attr('for')).val();
+        $(inputTime).val(timeSlotValue).change();
+    });
     });
 })
 })(jQuery)
