@@ -106,7 +106,9 @@ $(document).ready(function() {
             type: 'POST',
             data: {
                 action: 'booking_open_game',
-                gameId: gameId,
+                game_id: gameId,
+                date: $(inputDate).val(),
+                players: $(inputPlayersCount).val(),
                 current_id: booking_js_data.current_id,
                 _wpnonce: booking_js_data.ajax_nonce
             },
