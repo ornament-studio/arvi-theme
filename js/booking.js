@@ -7,6 +7,7 @@ $(document).ready(function() {
 	var inputGameId = '#input_1_6'
     var inputTime = '#input_1_22'
     var inputTimeSlots = '.booking-time_slots'
+    var inputProductPrice = '#input_1_45'
     var inputTotalSum = '#input_1_13'
     var playersMaxCount = 8
     var gamePrices = {}
@@ -130,7 +131,8 @@ $(document).ready(function() {
                 gamePrices = res.data.prices;
                 generatePlayersCountFieldDescription($(inputPlayersCountDescription), gamePrices);
                 totalSum = getPriceByPlayer(1, gamePrices);
-                $(inputTotalSum).val(totalSum);
+                $(inputProductPrice).val(totalSum).change();
+                $(inputProductPrice).attr('readonly', 'readonly');
             }
         }).done(() => {
             turnOffSpinner()
@@ -191,10 +193,10 @@ $(document).ready(function() {
         var price = 0;
         $.each(prices, (key, value) => {
             if (value['players'] == players) {
-                price = value['price'] * players
+                price = value['price'] * players;
             }
         })
-        return '$' + price + '.00';
+        return '$' + price;
     }
 
     function incrementValue(e) {
@@ -205,9 +207,9 @@ $(document).ready(function() {
 
         if (!isNaN(currentVal) && currentVal < playersMaxCount) {
             parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
-            $(inputPlayersCount).val(currentVal + 1);
-            totalSum = getPriceByPlayer(currentVal + 1, gamePrices)
-            $(inputTotalSum).val(totalSum);
+            totalSum = getPriceByPlayer(currentVal + 1, gamePrices);
+            $(inputProductPrice).val(totalSum).change();
+            $(inputPlayersCount).val(currentVal + 1).change();
             getTimeSlots();
         } else {
             // parent.find('input[name=' + fieldName + ']').val(1);
@@ -222,9 +224,9 @@ $(document).ready(function() {
 
         if (!isNaN(currentVal) && currentVal > 1) {
             parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
-            $(inputPlayersCount).val(currentVal - 1);
-            totalSum = getPriceByPlayer(currentVal - 1, gamePrices)
-            $(inputTotalSum).val(totalSum);
+            totalSum = getPriceByPlayer(currentVal - 1, gamePrices);
+            $(inputProductPrice).val(totalSum).change();
+            $(inputPlayersCount).val(currentVal - 1).change();
             getTimeSlots();
         } else {
             // parent.find('input[name=' + fieldName + ']').val(1);
