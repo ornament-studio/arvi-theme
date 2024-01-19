@@ -116,7 +116,7 @@ $(document).ready(function() {
                 _wpnonce: booking_js_data.ajax_nonce
             },
             success: (res) => {
-                // console.log(res);
+                console.log('getting game');
                 $('#bookblock .booking-items').addClass('hidden');
                 $('#bookblock .booking-item').html(res.data.game_item_tmp);
                 $(inputTimeSlots).html(res.data.time_slots_tmp);
@@ -160,6 +160,7 @@ $(document).ready(function() {
                 _wpnonce: booking_js_data.ajax_nonce
             },
             success: (res) => {
+                console.log('getting all games');
                 $('#bookblock .booking-wrapper').addClass('hidden');
                 $('#bookblock .booking-items').removeClass('hidden');
                 // $('#bookblock .container').html(res);
@@ -175,6 +176,7 @@ $(document).ready(function() {
 
     // Track changes in booking form and turn on datepicker again if GF plagin disable it
     document.arrive(".booking-form_calendar", function(newElem) {
+        console.log('enableDatepicker')
         if ($(this).is(':empty') && $('#gform_page_1_1').is(":visible")) {
             enableDatepicker($(this), {defaultDate: $(inputDate).val()});
             getTimeSlots();
@@ -259,7 +261,6 @@ $(document).ready(function() {
         console.log('Save Time Slot to hidden field');
         var timeSlotValue = $('#' + $(this).attr('for')).val();
         $(inputTime).val(timeSlotValue).change();
-    });
     });
 })
 })(jQuery)
